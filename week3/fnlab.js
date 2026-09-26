@@ -15,6 +15,12 @@ window.FnLab = (() => {
     const n = Number(id(name)?.value);
     return Number.isFinite(n) ? n : fallback;
   };
+  const numOrNull = name => {
+    const value = id(name)?.value;
+    if (value == null || !String(value).trim()) return null;
+    const n = Number(value);
+    return Number.isFinite(n) ? n : null;
+  };
   const point = (x, y) => `(${fmt(x)}, ${fmt(y)})`;
   function graph(target, curves, points = [], options = {}) {
     const el = typeof target === 'string' ? id(target) : target;
@@ -51,5 +57,5 @@ window.FnLab = (() => {
     const exact = b === 1 ? `${a}` : `${a}/${b}`;
     return `교점의 x = ${exact} (근삿값 ${x.toFixed(3)}), y = x² ≈ ${y.toFixed(3)}`;
   }
-  return {id,esc,f,g,line,fmt,signed,linear,parabola,num,point,graph,intersection};
+  return {id,esc,f,g,line,fmt,signed,linear,parabola,num,numOrNull,point,graph,intersection};
 })();

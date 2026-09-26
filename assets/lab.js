@@ -127,7 +127,8 @@
     const result = rows.map((row) => {
       if (!Array.isArray(row)) throw new TypeError('CSV 행은 배열이어야 합니다.');
       return row.map((value) => {
-        const str = value == null ? '' : String(value);
+        let str = value == null ? '' : String(value);
+        if (options && options.safe && /^[=+\-@\t\r]/.test(str)) str = "'" + str;
         return /[",\r\n]/.test(str) ? '"' + str.replace(/"/g, '""') + '"' : str;
       }).join(',');
     }).join('\r\n');
