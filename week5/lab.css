@@ -1,0 +1,23 @@
+/* Integrated lesson only; shared assets and individual levels are unchanged. */
+.lesson-stepper{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.6rem;margin-bottom:.8rem}
+.lesson-stepper button{min-width:0;min-height:64px;white-space:normal;text-align:left;flex-direction:column;align-items:flex-start}
+.lesson-stepper [aria-selected=true]{background:var(--accent-soft);border-color:var(--accent);color:var(--ink)}
+.lesson-stepper small{display:block;color:var(--muted);font-size:.8rem}
+.line-select{white-space:normal;text-align:left;width:100%;margin:.4rem 0;min-height:44px}
+.line-select[aria-pressed=true]{border-color:var(--graph-f);background:var(--accent-soft)}
+#problem .wrong{border-color:var(--line)}
+#problem .wrong h3{color:var(--ink)}
+.retry-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.retry-choice{min-width:0;padding:.8rem;border:1px solid var(--line);border-radius:6px;cursor:pointer}
+.retry-choice label{display:flex;align-items:center;gap:.5rem;min-height:44px}
+.retry-choice input{width:20px;height:20px}
+.summary-records{display:grid;gap:1rem;margin:1rem 0}
+.summary-record{border-top:1px solid var(--line);padding-top:1rem;min-width:0}
+.summary-record p{white-space:pre-wrap;overflow-wrap:anywhere}
+.teacher-content{margin-top:1rem}
+details>summary{cursor:pointer;min-height:44px;font-weight:700}
+fieldset{min-width:0;margin:1rem 0;border:1px solid var(--line);border-radius:6px}
+.lab-shell{overflow-wrap:anywhere}
+.lab-shell .btn{max-width:100%;white-space:normal}
+@media(max-width:650px){.lesson-stepper{grid-template-columns:1fr}.lesson-stepper button{min-height:44px}.lesson-stepper small{display:inline;margin-left:.5rem}.retry-choices{grid-template-columns:1fr}}
+@media print{#step-panel,nav,#teacher-panel,.idea-box,button,select{display:none!important}#summary-panel{border:0}.summary-record{break-inside:avoid}}

@@ -1,0 +1,42 @@
+/* Uses the shared notebook palette and fonts unchanged. */
+[hidden]{display:none!important}
+.tabs{flex-wrap:wrap;overflow:visible;margin-bottom:1.2rem}
+.tabs button{flex:1 1 130px}
+.controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.8rem}
+.controls .wide{grid-column:1/-1}
+.field input[type=range]{width:100%;min-height:44px;accent-color:var(--accent)}
+.error{color:var(--bad);min-height:1.6em;font-weight:700}
+.matrix-row{display:flex;align-items:flex-start;flex-wrap:wrap;gap:1.4rem;margin:1rem 0}
+.matrix{margin:0;max-width:100%}
+.matrix figcaption{font-weight:700;margin-bottom:.5rem}
+.matrix-array{display:inline-block;position:relative;padding:0 10px;margin:.3rem 0}
+.matrix-array:before,.matrix-array:after{content:'';position:absolute;top:0;bottom:0;width:7px;border-top:2px solid;border-bottom:2px solid;color:var(--ink)}
+.matrix-array:before{left:0;border-left:2px solid}
+.matrix-array:after{right:0;border-right:2px solid}
+.matrix table{width:auto;font-family:var(--font-mono);font-size:1.15rem}
+.matrix td{border:0;min-width:2.3em;padding:.3rem .5rem;text-align:center;vertical-align:middle}
+.matrix tbody tr:hover{background:transparent}
+.axis{font-size:.85rem;color:var(--muted);max-width:22rem}
+.wrong,.correct{padding:1rem;border-left:4px solid;margin:1rem 0;background:var(--surface)}
+.wrong{border-color:var(--bad)}
+.correct{border-color:var(--ok)}
+.wrong h3{color:var(--bad)}
+.correct h3{color:var(--ok)}
+.wrong-line{border-bottom:2px dotted var(--bad);font-weight:700}
+.steps{padding-left:1.5rem}
+.steps li{margin:.45rem 0;overflow-wrap:anywhere}
+.formula{font-family:var(--font-mono);overflow-wrap:anywhere}
+.hints{margin:1rem 0;display:grid;gap:.6rem}
+.hints p{margin:0;border-left:2px solid var(--graph-f);padding-left:.8rem}
+.blank{border-bottom:1px solid var(--line);min-height:3rem;margin-bottom:1rem}
+.bundle-list{padding-left:0;list-style:none}
+.bundle-item{border-top:1px solid var(--line);padding:1rem 0}
+.bundle-item summary{cursor:pointer;font-weight:700;min-height:44px}
+.bundle-item .row{margin:.6rem 0}
+.review-label{display:flex;align-items:center;gap:.6rem;min-height:44px}
+.review-label input{width:20px;height:20px}
+.sheet-actions{margin-bottom:1rem}
+.sheet article{border-bottom:1px solid var(--line);padding:1rem 0;break-inside:avoid}
+.sheet h2{font-family:var(--font-title)}
+@media(max-width:520px){.controls{grid-template-columns:1fr}.matrix-row{gap:1rem}.matrix td{min-width:2em}.panel{padding:16px}}
+@media print{#panel-clinic,.no-print{display:none!important}.sheet article{break-before:page}.sheet article:first-of-type{break-before:auto}.wrong,.correct{background:#fff}.blank{min-height:4rem}}
