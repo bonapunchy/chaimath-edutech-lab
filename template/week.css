@@ -1,0 +1,15 @@
+/* 이 주차에만 필요한 모양. 색·글꼴은 ../assets/lab.css의 공용 값을 씁니다. */
+.rail { display: flex; flex-wrap: wrap; gap: .5rem; padding: 0; margin: 0; list-style: none; }
+.rail li { border: 1px solid var(--line); border-radius: 999px; }
+.rail li.done { border-color: var(--ok); }
+.rail li.current { background: var(--accent-soft); border-color: var(--accent); }
+.rail li.current .btn { color: var(--ink); }
+.rail .btn { width: 100%; border-radius: 999px; }
+.record { border-top: 1px solid var(--line); padding-top: 1rem; margin-top: 1rem; }
+.record p { margin-bottom: .4rem; white-space: pre-wrap; }
+@media (max-width: 520px) {
+  .rail { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .rail li { display: flex; }
+  .lab-shell .row .btn { flex: 1 1 calc(50% - .65rem); }
+}
+h2[tabindex="-1"]:focus { outline: none; }

@@ -13,7 +13,7 @@
   --graph-f: #2F6FB0;
   --graph-g: #C2452D;
   --ok: #2E7D4F;
-  --warn: #B7791F;
+  --warn: #8F5D12; /* 흰 바탕 대비 5.6:1 (기존 #B7791F는 3.6:1) */
   --bad: #B3402E;
   --font-title: "Nanum Myeongjo", Georgia, "Times New Roman", serif;
   --font-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
@@ -106,8 +106,9 @@ input:not([type="checkbox"]):not([type="radio"]):not([type="range"]), select, te
   background: var(--surface); color: var(--ink);
 }
 textarea { min-height: 7rem; resize: vertical; }
+input[type="checkbox"], input[type="radio"] { width: 22px; height: 22px; flex: 0 0 auto; margin: 0; accent-color: var(--accent); }
 input:disabled, select:disabled, textarea:disabled, button:disabled { opacity: .55; cursor: not-allowed; }
-.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 2.7rem; padding: .55rem .9rem; border: 1px solid var(--line); border-radius: 5px; background: var(--surface); color: var(--ink); font-weight: 700; line-height: 1.25; text-decoration: none; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 2.75rem; min-width: 2.75rem; padding: .55rem .9rem; border: 1px solid var(--line); border-radius: 5px; background: var(--surface); color: var(--ink); font-weight: 700; line-height: 1.25; text-decoration: none; }
 .btn:hover { border-color: var(--accent); }
 .btn-primary { background: var(--accent); color: var(--paper); border-color: var(--accent); }
 .btn-primary:hover { filter: brightness(1.1); }
