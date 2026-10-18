@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="data:,">
+<!-- ✏️ [바꿀 곳 1] 브라우저 탭에 보일 제목 -->
+<title>과제 제목 · N주차</title>
+<link rel="stylesheet" href="../assets/lab.css">
+<link rel="stylesheet" href="week.css">
+<script src="../assets/lab.js" defer></script>
+<script src="lab.js" defer></script>
+</head>
+<body>
+<main class="lab-shell stack">
+
+<!-- ✏️ [바꿀 곳 2] 주차·제목·작성자 -->
+<header class="lab-head">
+  <p class="eyebrow">WEEK 0N · 통합판</p>
+  <h1>과제 제목</h1>
+  <p class="meta">김원표T · 차이수학 · 수학</p>
+</header>
+
+<p><span class="chip chip-demo">가상 예시</span> 저장 내용은 이 브라우저에만 남습니다. 실제 학생의 이름·학교·연락처·성적은 입력하지 마세요.</p>
+
+<div class="field">
+  <label for="student">가상 학생 이름</label>
+  <input id="student" value="가상 학생 A" autocomplete="off">
+</div>
+
+<!-- 단계 이동 버튼은 lab.js가 STEPS 목록을 보고 자동으로 만듭니다. -->
+<nav aria-label="활동 단계"><ol id="rail" class="rail"></ol></nav>
+
+<!-- ✏️ [바꿀 곳 3] 단계 내용. 단계를 늘리려면 <section class="panel step"> 하나를 통째로 복사하고
+     id의 숫자(step-1 → step-3)와 lab.js의 STEPS 목록을 함께 늘리세요. -->
+<section id="step-1" class="panel step" aria-labelledby="step-1-title">
+  <h2 id="step-1-title" tabindex="-1">① 첫 번째 활동</h2>
+  <p>여기에 활동 설명이나 문제를 씁니다.</p>
+  <div class="field"><label for="step-1-predict">예측</label><input id="step-1-predict" placeholder="예: 기울기가 커지면 그래프가 더 가팔라진다."></div>
+  <div class="field"><label for="step-1-explain">내 설명</label><textarea id="step-1-explain" placeholder="관찰한 내용과 이유를 내 말로 써 보세요."></textarea></div>
+  <button class="btn btn-primary" type="button" data-record="1">기록하기</button>
+</section>
+
+<section id="step-2" class="panel step" aria-labelledby="step-2-title" hidden>
+  <h2 id="step-2-title" tabindex="-1">② 두 번째 활동</h2>
+  <p>여기에 활동 설명이나 문제를 씁니다.</p>
+  <div class="field"><label for="step-2-predict">예측</label><input id="step-2-predict"></div>
+  <div class="field"><label for="step-2-explain">내 설명</label><textarea id="step-2-explain"></textarea></div>
+  <button class="btn btn-primary" type="button" data-record="2">기록하기</button>
+</section>
+
+<div class="row">
+  <button id="prev" class="btn" type="button">← 이전 단계</button>
+  <button id="next" class="btn" type="button">다음 단계 →</button>
+</div>
+
+<section class="panel" aria-labelledby="notes-title">
+  <h2 id="notes-title">실험 노트</h2>
+  <p id="note-status" class="note" role="status" aria-live="polite"></p>
+  <div id="records"></div>
+  <div class="row">
+    <button id="save-text" class="btn" type="button">텍스트로 저장</button>
+    <button id="clear" class="btn" type="button">기록 모두 지우기</button>
+  </div>
+</section>
+
+<!-- ✏️ [바꿀 곳 4] 학원관리프로그램 아이디어 (필요 없으면 지워도 됩니다) -->
+<aside class="idea-box">
+  <h2>학원관리프로그램에 가져갈 아이디어</h2>
+  <p>이 활동에서 남는 기록을 학원 앱의 어떤 화면과 연결할지 적어 둡니다.</p>
+</aside>
+
+<noscript><p>이 수업을 사용하려면 브라우저의 자바스크립트를 켜 주세요.</p></noscript>
+</main>
+</body>
+</html>
