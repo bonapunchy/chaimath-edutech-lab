@@ -1,0 +1,8 @@
+{
+  "name": "chaimath-edutech-lab",
+  "private": true,
+  "description": "초강스 에듀테크 LAB 과제 (정적 페이지, 빌드 없음)",
+  "scripts": {
+    "test": "node --test tests/*.test.js"
+  }
+}
