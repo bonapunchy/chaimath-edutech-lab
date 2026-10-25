@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>이차함수 수업 한바퀴</title>
+<link rel="stylesheet" href="lab.css">
+<script src="lab.js" defer></script>
+</head>
+<body>
+<main id="lesson-main" class="lab-shell stack">
+<header class="lab-head"><p class="eyebrow">WEEK 06 · 통합 수업</p><h1>이차함수 수업 한바퀴</h1><p class="meta">차이수학 원표쌤</p></header>
+<p><span class="chip chip-demo">가상 데이터 · 익명 반 집계 예시</span></p>
+<p class="note">2022 개정 공통수학1 [10공수1-02-06] · 이차함수의 최대·최소를 직접 대입·비교로 알아봅니다. 실제 학생 이름·성적·연락처는 입력하지 마세요. 인원만 집계하며 개인별 그룹을 배정하지 않습니다.</p>
+<nav class="flow-nav no-print" aria-label="수업 흐름"><a href="#intro">도입</a><a href="#diagnosis">진단</a><a href="#before-section">익명 집계</a><a href="#route-section">15분 수업</a><a href="#exit-section">출구 질문</a><a href="#after-section">전후 비교</a><a href="#save-section">메모·저장</a></nav>
+<details class="panel no-print"><summary>함수·닫힌구간과 수업 질문 바꾸기</summary><div class="stack">
+<p>f(x)=a(x−h)²+k · 모든 조건은 정수입니다. 조건 입력을 바꾸면 선택·이유·출구 답안·정답 공개·전후 집계를 지웁니다.</p>
+<div class="conditions">
+<div class="field"><label for="a">a (1~3)</label><input id="a" type="number" min="1" max="3" step="1" inputmode="numeric" value="1"></div>
+<div class="field"><label for="h">h (−3~3)</label><input id="h" type="number" min="-3" max="3" step="1" inputmode="numeric" value="1"></div>
+<div class="field"><label for="k">k (−3~3)</label><input id="k" type="number" min="-3" max="3" step="1" inputmode="numeric" value="-2"></div>
+<div class="field"><label for="left">왼쪽 끝 (−4~4)</label><input id="left" type="number" min="-4" max="4" step="1" inputmode="numeric" value="2"></div>
+<div class="field"><label for="right">오른쪽 끝 (−4~4)</label><input id="right" type="number" min="-4" max="4" step="1" inputmode="numeric" value="4"></div>
+</div>
+<div class="field"><label for="nickname">수업 별명 (40자 이내)</label><input id="nickname" maxlength="40" value="차이수학 원표쌤"></div>
+<div class="field"><label for="question">도입 질문 (300자 이내)</label><textarea id="question" maxlength="300"></textarea></div>
+</div></details>
+<p id="input-error" class="error" role="status" aria-live="polite"></p>
+<section id="intro" class="panel stack" aria-labelledby="intro-title"><h2 id="intro-title">1. 도입 질문 카드</h2><div id="problem"></div><button id="project-intro" class="btn no-print" type="button" aria-haspopup="dialog" aria-controls="class-screen">수업 화면 크게 보기 (P)</button><p class="note no-print">큰 수업 화면에는 질문과 그래프만 보입니다. Esc로 돌아옵니다. 입력 중에는 P 단축키가 작동하지 않습니다.</p></section>
+<section id="diagnosis" class="panel stack" aria-labelledby="diagnosis-title"><h2 id="diagnosis-title">2. 세 문항 미니 진단</h2><p>보기를 고르고 이유를 말해 보세요. 아래 입력은 가상 연습이며 개인 기록으로 저장하지 않습니다.</p><div id="questions"></div><button id="check-answer" class="btn no-print" type="button" aria-expanded="false" aria-controls="answer">세 문항 선택 확인 · 교사용</button><p id="diagnosis-status" role="status" aria-live="polite"></p><div id="answer" hidden></div></section>
+<section id="before-section" class="panel stack" aria-labelledby="before-title"><h2 id="before-title">3. 수업 전 익명 반 응답 집계</h2><div class="field"><label for="class-size">학급 인원 (1~60명)</label><input id="class-size" type="number" min="1" max="60" step="1" inputmode="numeric" value="20"></div><p class="note">보기 순서와 내용을 종이 응답과 대조한 뒤 인원만 입력하세요. 빈칸은 0이 아닙니다. 응답 합계는 학급 인원을 넘을 수 없습니다.</p><button id="load-sample" class="btn" type="button">가상 20명 표본 불러오기</button><div id="counts-before"></div><details><summary>교사용 익명 집계와 추가 질문 보기</summary><div id="board-before"></div></details></section>
+<section id="route-section" class="panel stack" aria-labelledby="route-title"><h2 id="route-title">4. 교사가 고르는 15분 수업</h2><p>집계와 학생의 설명을 참고하여 교사가 반 전체의 경로를 선택합니다. 개인별 그룹은 만들지 않습니다.</p><div class="field"><label for="path">오늘의 수업 경로</label><select id="path"><option value="foundation">개념 다지기 · 3+5+5+2분</option><option value="extension">적용 확장 · 2+5+5+3분</option></select></div><div id="lesson"></div></section>
+<section id="exit-section" class="panel stack" aria-labelledby="exit-title"><h2 id="exit-title">5. 출구 질문</h2><p class="note">선택한 15분 수업의 마지막 활동입니다. 추가 시간이 아닙니다.</p><p id="exit-question" class="exit-question"></p><div class="field"><label for="exit-response">내 이유 한 문장 · 가상 연습 (800자 이내, JSON 저장 제외)</label><textarea id="exit-response" maxlength="800"></textarea></div><button id="project-exit" class="btn no-print" type="button" aria-haspopup="dialog" aria-controls="class-screen">출구 질문 수업 화면</button></section>
+<section id="after-section" class="panel stack" aria-labelledby="after-title"><h2 id="after-title">6. 수업 후 집계와 전후 비교</h2><p>출구 설명을 나눈 뒤, 같은 조건의 세 문항에 다시 응답하고 수업 후 인원을 별도로 집계하세요. 출구 서술 답안의 점수는 아래 정답률에 포함하지 않습니다.</p><div id="counts-after"></div><details><summary>교사용 수업 후 익명 집계 보기</summary><div id="board-after"></div></details><div id="comparison"></div></section>
+<section id="save-section" class="panel stack" aria-labelledby="save-title"><h2 id="save-title">7. 교사 메모와 다음 수업 준비</h2><div class="field"><label for="teacher-memo">교사 메모 (2000자 이내 · 실제 학생 정보 금지)</label><textarea id="teacher-memo" maxlength="2000"></textarea></div>
+<div class="row no-print"><button id="export-json" class="btn btn-primary" type="button">수업 JSON 저장</button><button id="copy-json" class="btn" type="button">JSON 복사</button><button id="manual-json" class="btn" type="button">JSON 직접 복사</button></div>
+<div class="field no-print"><label for="import-json">수업 JSON 파일 불러오기 (32KB 이하)</label><input id="import-json" type="file" accept=".json,application/json"></div><div class="field no-print"><label for="import-text">JSON 전체 붙여 넣기</label><textarea id="import-text" maxlength="32768"></textarea></div>
+<div class="row no-print"><button id="import-text-button" class="btn" type="button">붙여 넣은 JSON 불러오기</button><button id="continue-lesson" class="btn" type="button" disabled>불러온 수업의 출구 질문으로 다음 수업 시작</button></div>
+<p class="note">version=1 · subject="quadratic-lesson". 기존 단계와 같은 검증을 적용합니다. 불러오면 현재 수업을 교체합니다. 실패하면 기존 자료를 유지합니다. 다음 수업은 마지막으로 불러온 JSON의 조건·경로·학급 인원·별명을 이어받고, 그 경로의 출구 질문을 새 도입으로 씁니다. 선택·답안·전후 집계·교사 메모는 비웁니다.</p><p id="data-status" role="status" aria-live="polite"></p>
+<details class="no-print"><summary>학생 활동지 · 별도 배포</summary><p>학생에게는 아래 활동지만 배포하세요. 서술형 빈칸으로 구성하며 정답·해설·집계·교사 메모는 포함하지 않습니다.</p><div class="row"><button id="save-student" class="btn btn-primary" type="button">학생 활동지 HTML 저장</button><button id="copy-student" class="btn" type="button">활동지 복사</button><button id="manual-student" class="btn" type="button">활동지 직접 복사</button><button id="print-student" class="btn" type="button">활동지 인쇄</button></div></details>
+<details class="no-print"><summary>교사용 해설 · 별도 저장</summary><div class="row"><button id="save-teacher" class="btn" type="button">교사용 HTML 저장</button><button id="manual-teacher" class="btn" type="button">교사용 직접 복사</button></div></details>
+<p class="note no-print">저장·복사 화면에서 내용을 직접 복사할 수 있습니다. 다운로드가 막히면 HTML로 저장하여 브라우저에서 여세요. 수업 JSON은 집계·메모가 포함된 교사용 자료입니다. 화면 분리는 로그인 권한 통제가 아닙니다.</p>
+</section><noscript><p>수업 도구를 사용하려면 브라우저의 자바스크립트를 켜 주세요.</p></noscript>
+</main>
+<section id="class-screen" class="class-screen" role="dialog" aria-modal="true" aria-labelledby="screen-title" hidden><div class="screen-toolbar"><h2 id="screen-title">도입 질문</h2><button id="close-screen" class="btn" type="button">수업 화면 닫기 (Esc)</button></div><p id="screen-question"></p><div id="screen-graph"></div></section>
+<main id="print-sheet" class="print-only" hidden></main>
+</body>
+</html>
