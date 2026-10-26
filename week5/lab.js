@@ -24,8 +24,8 @@
     for(let n=0;n<25;n++){
       r=M.retry(s.type,p,random);p=r.params;
       if(s.type==='price'&&p.p1===p.p2)p={...p,p2:p.p2===9?1:p.p2+1};
-      if(JSON.stringify(p)!==cond(r.params))r=M.retry(s.type,p,random);
-      p=r.params;
+      // Rebuild the choices only when the price nudge changed the numbers.
+      if(JSON.stringify(p)!==JSON.stringify(r.params)){const d=M.derive(s.type,p);r={...r,params:p,choices:r.correctIndex===0?[d.answer,d.wrong]:[d.wrong,d.answer]};}
       if(JSON.stringify(p)!==JSON.stringify(s.params)&&!M.equal(r.choices[0],r.choices[1]))break;
     }
     s.retry=r;s.choice=null;s.retryAttempts=[];s.checksOpened=false;s.verified=false;return r;
@@ -37,6 +37,7 @@
   }
   const retryResult=s=>s.retryAttempts.length&&s.retryAttempts.at(-1).choice===s.choice?s.retryAttempts.at(-1).correct:null;
   const completed=s=>explained(s)&&retryResult(s)===true&&s.checksOpened&&s.verified;
+  const progress=s=>completed(s)?'완료':s.lineAttempts.length||s.explanation.trim()||s.hintCount||s.retry?'진행 중':'진행 전';
   function summary(lesson){return lesson.steps.map((s,i)=>({step:i+1,title:NAMES[i],params:clone(s.params),lineResult:s.lineAttempts.length?s.lineAttempts.at(-1).correct:null,lineAttempts:clone(s.lineAttempts),hintCount:s.hintCount,retryResult:retryResult(s),retryParams:s.retry?clone(s.retry.params):null,retryAttempts:clone(s.retryAttempts),explanation:s.explanation,verified:s.verified,complete:completed(s)}));}
   function summaryHTML(lesson){return summary(lesson).map(r=>`<article class="summary-record"><h3>Step ${r.step} · ${esc(r.title)} <span class="chip ${r.complete?'chip-ok':'chip-warn'}">${r.complete?'완료':'진행 중'}</span></h3><p>찾은 줄: ${r.lineResult===null?'미선택':r.lineResult?'맞음':'틀림'} · 선택 기록: ${r.lineAttempts.map(a=>`${a.line}번 ${a.correct?'맞음':'틀림'}`).join(' → ')||'없음'}</p><p>힌트 사용: ${r.hintCount}/3 · 재도전: ${r.retryResult===null?'미확인':r.retryResult?'맞음':'틀림'} · 검산: ${r.verified?'완료':'대기'}</p><p>원래 조건: ${esc(cond(r.params))}${r.retryParams?' · 재도전 조건: '+esc(cond(r.retryParams)):''}</p><p>재도전 선택 기록: ${r.retryAttempts.map(a=>`${a.choice+1}번 ${a.correct?'맞음':'틀림'}`).join(' → ')||'없음'}</p><p>내 설명: ${esc(r.explanation||'아직 쓰지 않았습니다.')}</p></article>`).join('');}
   function summaryText(lesson){return `${lesson.student} · 오답 클리닉 기록 · 차이수학 원표쌤\n`+summary(lesson).map(r=>`\nStep ${r.step} · ${r.title}\n찾은 줄: ${r.lineAttempts.map(a=>`${a.line}번 ${a.correct?'맞음':'틀림'}`).join(' → ')||'미선택'}\n힌트 사용: ${r.hintCount}/3\n재도전: ${r.retryResult===null?'미확인':r.retryResult?'맞음':'틀림'}\n재도전 조건: ${r.retryParams?cond(r.retryParams):'없음'}\n검산: ${r.verified?'완료':'대기'}\n내 설명: ${r.explanation}`).join('\n');}
@@ -52,7 +53,7 @@
     const $=id=>document.getElementById(id);
     const lessons=new Map();let lesson=createLesson(),bundle=createBundle();lessons.set(lesson.student,lesson);
     const step=()=>lesson.steps[lesson.active];
-    function renderSummary(){const done=lesson.steps.filter(completed).length;$('summary-status').textContent=`${lesson.student} · 5단계 중 ${done}단계 완료`;$('summary-records').innerHTML=summaryHTML(lesson);$('stepper').querySelectorAll('small').forEach((el,i)=>el.textContent=completed(lesson.steps[i])?'완료':'진행 전·진행 중');}
+    function renderSummary(){const done=lesson.steps.filter(completed).length;$('summary-status').textContent=`${lesson.student} · 5단계 중 ${done}단계 완료`;$('summary-records').innerHTML=summaryHTML(lesson);$('stepper').querySelectorAll('small').forEach((el,i)=>el.textContent=progress(lesson.steps[i]));}
     function gates(){
       const s=step(),ready=explained(s),attempted=retryResult(s)!==null;
       $('my-explanation').disabled=!s.lineFound;$('open-hint').disabled=!ready||s.hintCount===3;$('generate-retry').disabled=!ready;
@@ -87,7 +88,7 @@
       $('my-explanation').value=s.explanation;renderHints();renderRetry();$('stepper').querySelectorAll('button').forEach((b,i)=>{b.setAttribute('aria-selected',String(i===lesson.active));b.tabIndex=i===lesson.active?0:-1;});gates();
     }
     function go(index,focus=false){lesson.active=Math.max(0,Math.min(4,index));render();if(focus)$(`step-${lesson.active+1}`).focus();}
-    NAMES.forEach((name,i)=>{const b=document.createElement('button');b.id=`step-${i+1}`;b.type='button';b.className='btn';b.setAttribute('role','tab');b.setAttribute('aria-controls','step-panel');b.innerHTML=`Step ${i+1} · ${esc(name)}<small>진행 전·진행 중</small>`;b.onclick=()=>go(i);b.onkeydown=e=>{let n;if(e.key==='ArrowRight')n=(i+1)%5;if(e.key==='ArrowLeft')n=(i+4)%5;if(e.key==='Home')n=0;if(e.key==='End')n=4;if(n!==undefined){e.preventDefault();go(n,true);}};$('stepper').append(b);});
+    NAMES.forEach((name,i)=>{const b=document.createElement('button');b.id=`step-${i+1}`;b.type='button';b.className='btn';b.setAttribute('role','tab');b.setAttribute('aria-controls','step-panel');b.innerHTML=`Step ${i+1} · ${esc(name)}<small>진행 전</small>`;b.onclick=()=>go(i);b.onkeydown=e=>{let n;if(e.key==='ArrowRight')n=(i+1)%5;if(e.key==='ArrowLeft')n=(i+4)%5;if(e.key==='Home')n=0;if(e.key==='End')n=4;if(n!==undefined){e.preventDefault();go(n,true);}};$('stepper').append(b);});
     $('my-explanation').oninput=e=>{step().explanation=e.target.value;gates();};
     $('open-hint').onclick=()=>{openHint(step());renderHints();gates();};
     $('generate-retry').onclick=()=>{makeRetry(step());renderRetry();gates();};
@@ -134,5 +135,5 @@
     $('import-json').onchange=async e=>{const file=e.target.files[0];if(!file)return;try{if(file.size>200000)throw Error('JSON은 200KB 이하로 불러와 주세요.');applyImport(await file.text());}catch(error){status('불러오기 실패: '+error.message);}e.target.value='';};
     const api={getState:()=>clone({lesson,bundle}),go,applyImport};window.Week5Lab.ui=api;render();renderBundle();
   }
-  return {NAMES,createLesson,fresh,findLine,openHint,makeRetry,choose,checkRetry,retryResult,completed,summary,summaryHTML,summaryText,setParams,createBundle,addItem,init};
+  return {NAMES,createLesson,fresh,findLine,openHint,makeRetry,choose,checkRetry,retryResult,completed,progress,summary,summaryHTML,summaryText,setParams,createBundle,addItem,init};
 });
